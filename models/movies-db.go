@@ -16,8 +16,12 @@ func (m *DBModel) Get(id int) (*Movie, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
 	defer cancel()
 
-	query := `select id, title, description, year, release_date, rating, runtime, mpaa_rating,
-				created_at, updated_at from movies where id = $1
+	query := `select 
+		id, title, description, year, release_date, rating, runtime, mpaa_rating, created_at, updated_at 
+	from 
+		movies
+	where
+		id = $1
 	`
 
 	row := m.DB.QueryRowContext(ctx, query, id)
